@@ -30,6 +30,11 @@ namespace Pinetime {
       static Screens::Screen* Create(AppControllers& controllers) {
         return new Screens::ActivityApp();
       }
+
+      // Availability check used by the userApps registration system.
+      // Return true when the app should be visible/available (e.g., when required
+      // resources are present). Keep it simple and always return true for now.
+      static bool IsAvailable(Controllers::FS& /*filesystem*/) { return true; }
     };
   }
 }
