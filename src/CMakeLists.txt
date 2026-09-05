@@ -403,6 +403,7 @@ list(APPEND SOURCE_FILES
         displayapp/widgets/PageIndicator.cpp
         displayapp/widgets/DotIndicator.cpp
         displayapp/widgets/StatusIcons.cpp
+        displayapp/screens/ActivityApp.cpp
 
         ## Settings
         displayapp/screens/settings/QuickSettings.cpp
@@ -607,6 +608,7 @@ set(INCLUDE_FILES
         displayapp/screens/SystemInfo.h
         displayapp/screens/ScreenList.h
         displayapp/screens/Label.h
+        displayapp/screens/ActivityApp.h
         displayapp/screens/FirmwareUpdate.h
         displayapp/screens/FirmwareValidation.h
         displayapp/screens/ApplicationList.h
