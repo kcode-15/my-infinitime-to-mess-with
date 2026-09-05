@@ -28,7 +28,7 @@ namespace Pinetime {
       static constexpr Apps app = Apps::ActivityApp;
       static constexpr const char* icon = "\uF04B"; // Just a standard play icon
       static Screens::Screen* Create(AppControllers& controllers) {
-        return new Screens::Screen(controllers);
+        return new Screens::ActivityApp();
       }
     };
   }
