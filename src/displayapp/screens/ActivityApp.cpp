@@ -6,18 +6,22 @@ using namespace Pinetime::Applications::Screens;
 // 1. A simple list of activities to pull from
 const char* activities[] = {
   "Go for a walk!",
-  "Drink water!",
-  "Do 10 pushups!",
+  "Do dot art",
+  "Draw",
+  "(-_-)",
+  "give someone a hug",
+  "clean.",
+  "balence on the practice surfboard",
   "Read a book!",
-  "Stretch your back!",
+  "Play some football",
   "Clean your desk!"
 };
-const int totalActivities = 6;
+const int totalActivities = 10;
 
 ActivityApp::ActivityApp() {
   // 2. Create the Text Box at the top
   textLabel = lv_label_create(lv_scr_act(), nullptr);
-  lv_label_set_text(textLabel, "Tap below for a task");
+  lv_label_set_text(textLabel, "Tap below for a task (((((----______------)))))))");
   lv_label_set_align(textLabel, LV_LABEL_ALIGN_CENTER);
   lv_obj_align(textLabel, lv_scr_act(), LV_ALIGN_IN_TOP_MID, 0, 40);
 
