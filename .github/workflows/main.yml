@@ -44,10 +44,26 @@ jobs:
           apt-get update
           apt-get -y install --no-install-recommends python3-pil
 
-      - name: Build
-        shell: bash
-        run: |
-          /opt/build.sh all
+- name: Make build script tolerant of unmatched globs
+  shell: bash
+  run: |
+    if [ -f /opt/build.sh ]; then
+      # If the first line is a shebang, append after it; otherwise insert at top.
+      if head -n1 /opt/build.sh | grep -q '^#!'; then
+        sed -i '1a shopt -s nullglob' /opt/build.sh
+      else
+        sed -i '1i shopt -s nullglob' /opt/build.sh
+      fi
+      echo "/opt/build.sh patched (first 40 lines):"
+      sed -n '1,40p' /opt/build.sh || true
+    else
+      echo "/opt/build.sh not found; skipping patch"
+    fi
+
+- name: Build
+  shell: bash
+  run: |
+    /opt/build.sh all
 
       - name: Output build size
         id: output-sizes
