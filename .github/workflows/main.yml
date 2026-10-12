@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: infinitime/infinitime-build
+      options: --entrypoint /bin/bash
     outputs:
       text_size: ${{ steps.output-sizes.outputs.text_size }}
       data_size: ${{ steps.output-sizes.outputs.data_size }}
