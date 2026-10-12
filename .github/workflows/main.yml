@@ -26,8 +26,6 @@ jobs:
       firmware_artifact: ${{ steps.upload-firmware.outputs.artifact-id }}
       resources_artifact: ${{ steps.upload-resources.outputs.artifact-id }}
     env:
-      # InfiniTime sources are downloaded to the current directory.
-      # Override SOURCES_DIR in build.sh
       SOURCES_DIR: .
     steps:
       - name: Checkout source files
@@ -213,7 +211,6 @@ jobs:
       - if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
         name: Build
         shell: bash
-        # Only pinetime-app target is needed, but post_build.sh fails
         run: /opt/build.sh all
 
       - name: Output build size
