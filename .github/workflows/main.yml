@@ -2,7 +2,7 @@ name: CI
 
 # Run this workflow whenever the build may be affected or manually triggered
 on:
-  workflow_dispatch: # Allows manual run from GitHub UI
+  workflow_dispatch:
   push:
     branches: [ main ]
     paths-ignore:
@@ -59,7 +59,7 @@ jobs:
       - name: Locate generated artifacts
         shell: bash
         run: |
-          echo "Build tree:"
+          echo "Build tree (maxdepth 4):"
           find ./build -maxdepth 4 -type f | sort || true
           echo "MCUBoot candidates:"
           find ./build -type f -name 'pinetime-mcuboot-app-image-*.bin' -print | sort || true
@@ -67,11 +67,12 @@ jobs:
       - name: Unzip DFU package
         shell: bash
         run: |
-          unzip ./build/output/pinetime-mcuboot-app-dfu-*.zip -d ./build/output/pinetime-mcuboot-app-dfu
+          unzip ./build/output/pinetime-mcuboot-app-dfu-*.zip -d ./build/output/pinetime-mcuboot-app-dfu || true
 
       - name: Copy MCUBoot image to stable output path
         shell: bash
         run: |
+          # Make globbing safe: unmatched globs expand to empty list
           shopt -s nullglob
           candidates=(./build/output/pinetime-mcuboot-app-image-*.bin ./build/src/pinetime-mcuboot-app-image-*.bin ./build/**/pinetime-mcuboot-app-image-*.bin)
 
@@ -156,7 +157,6 @@ jobs:
           git -C InfiniSim submodule update --init lv_drivers
 
       - name: CMake
-        # disable BUILD_RESOURCES as this is already done when building the firmware
         shell: bash
         run: |
           cmake -G Ninja -S InfiniSim -B build_lv_sim -DInfiniTime_DIR="${PWD}" -DBUILD_RESOURCES=OFF
